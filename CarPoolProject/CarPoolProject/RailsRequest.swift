@@ -824,18 +824,16 @@ class RailsRequest: NSObject {
         })
     }
     
-    func deleteUserFromCarpoolWithCompletion(carpool: [String:AnyObject], completion: () -> Void) {
-        
-        var stringId = carpool["id"] as! Int
+    func deleteUserFromCarpoolWithCompletion(carpoolId: Int, user: String, completion: () -> Void) {
         
         var info = [
         
             "method" : "DELETE",
-            "endpoint" : "carpool/\(stringId)/user/\(givenUser!)"
+            "endpoint" : "carpool/\(carpoolId)/user/\(user)"
         ] as [String:AnyObject]
         
         requestWithInfo(info, andCompletion: { (responseInfo) -> Void in
-            println("the job is done")
+            println(responseInfo)
             completion()
         })
     }
@@ -880,7 +878,10 @@ class RailsRequest: NSObject {
             }
             //// Body
             
+            
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: { (response, data, error) -> Void in
+                
+                if data != nil {
                 
                 if let json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil) as? [String:AnyObject] {
                     
@@ -890,6 +891,7 @@ class RailsRequest: NSObject {
                     
                     completion?(responseInfo: nil)
                     
+                    }
                 }
             })
         }

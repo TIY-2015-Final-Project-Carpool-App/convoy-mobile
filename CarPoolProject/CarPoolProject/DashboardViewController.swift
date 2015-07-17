@@ -222,7 +222,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         if let cellButton = sender as? UIButton {
             
-            if let users = RailsRequest.session().carpools[sender!.tag]["users"] as? [[String:AnyObject]] {
+            if let users = RailsRequest.session().carpools[cellButton.tag]["users"] as? [[String:AnyObject]] {
                 
                 if let carpoolDetailVC = segue.destinationViewController as? CarpoolDetailViewController {
                     
@@ -234,7 +234,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         if let cellButton = sender as? UIButton {
             
-            if let carpoolId = RailsRequest.session().carpools[sender!.tag]["id"] as? Int {
+            if let carpoolId = RailsRequest.session().carpools[cellButton.tag]["id"] as? Int {
                 
                 if let carpoolDetailVC = segue.destinationViewController as? CarpoolDetailViewController {
                    

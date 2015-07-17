@@ -99,14 +99,15 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
         
         let cellButton = sender as! UIButton
         
-        let carpool = RailsRequest.session().carpools[cellButton.tag]
-        
-        RailsRequest.session().carpools.removeAtIndex(cellButton.tag) // confused as to why this works and not deleting the actaull carpool
+        let user = users![cellButton.tag]["username"] as! String
+        println(user)
+        println("this is the carpool id \(carpoolId!)")
+        users!.removeAtIndex(cellButton.tag)
         self.carpoolUserTableView.reloadData()
         
-        RailsRequest.session().deleteUserFromCarpoolWithCompletion(carpool, completion: { () -> Void in
-            println("the job is done")
-        })
+        RailsRequest.session().deleteUserFromCarpoolWithCompletion(carpoolId!, user: user) { () -> Void in
+            println("user was deleted from carpool")
+        }
     }
     
     
