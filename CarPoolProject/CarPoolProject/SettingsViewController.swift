@@ -47,7 +47,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIAlertView
         emailTextField.delegate = self
         addressTextField.delegate = self
         phoneNumberTextField.delegate = self
-        currentUsernameTextField.delegate = self
+
         
         childrenTableView.delegate = self
         childrenTableView.dataSource = self
@@ -133,7 +133,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIAlertView
         let email = emailTextField.text
         let address = addressTextField.text
         let phoneNumber = phoneNumberTextField.text
-        let currentUsername = currentUsernameTextField.text
+
 
         
         RailsRequest.session().username = username
@@ -143,7 +143,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIAlertView
         RailsRequest.session().email = email
         RailsRequest.session().address = address
         RailsRequest.session().phoneNumber = phoneNumber
-        RailsRequest.session().ogUsername = currentUsername
+
         
         if username.isEmpty || password.isEmpty || firstname.isEmpty || lastname.isEmpty || email.isEmpty {
             

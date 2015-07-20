@@ -59,6 +59,9 @@ class RailsRequest: NSObject {
     var contactIds: [[String:AnyObject]] = [[:]]
     var carpools: [[String:AnyObject]] = [[:]]
     var invites: [[String:AnyObject]] = [[:]]
+    var userAppointments: [[String:AnyObject]] = [[:]]
+    var carpoolAppointments: [[String:AnyObject]] = [[:]]
+    var posts: [[String:AnyObject]] = [[:]]
     
     var username = ""
     var password = ""
@@ -95,7 +98,13 @@ class RailsRequest: NSObject {
     var title = ""
     var descript = ""
     
-//    var joinedToken = ""
+    var start = ""
+    var origin = ""
+    var destination = ""
+    var distanceFilter = 15
+    
+    var body = ""
+    var urgency = ""
     
     ////////////////////////////////////////////////////////////// POST
     
@@ -388,6 +397,80 @@ class RailsRequest: NSObject {
             completion()
         })
     }
+    
+    func createAppointmentWithCompletion(carpoolId: Int, completion: () -> Void) {
+        
+        var info = [
+            
+            "method" : "POST",
+            "endpoint" : "/carpool/\(carpoolId)/appointments",
+            "parameters" : [
+            
+                "start" : start,
+                "title" : title,
+                "description" : descript,
+                "origin" : origin,
+                "destination" : destination,
+                "distance_filter" : distanceFilter
+            ]
+        ] as [String:AnyObject]
+        
+        requestWithInfo(info, andCompletion: { (responseInfo) -> Void in
+            
+            println(responseInfo)
+            completion()
+        })
+    }
+    
+    func joinAppointmentWithCompletion(appointmentId: Int, completion: () -> Void) {
+        
+        var info = [
+        
+            "method" : "POST",
+            "endpoint" : "/user/\(givenUser!)/appointment/\(appointmentId)/join"
+        ] as [String:AnyObject]
+        
+        requestWithInfo(info, andCompletion: { (responseInfo) -> Void in
+            
+            println(responseInfo)
+            completion()
+        })
+    }
+    
+    func joinChildtoAppointmentWithCompletion(childId: Int, appointmentId: Int, completion: () -> Void) {
+        
+        var info = [
+        
+            "method" : "POST",
+            "endpoint" : "/child/\(childId)/appointment/\(appointmentId)/join"
+        ] as [String:AnyObject]
+        
+        requestWithInfo(info, andCompletion: { (responseInfo) -> Void in
+            
+            println(responseInfo)
+            completion()
+        })
+    }
+    
+    func createPostWithCompletion(carpoolId: Int, completion: () -> Void) {
+        
+        var info = [
+        
+            "method" : "POST",
+            "endpoint" : "/carpool/\(carpoolId)/posts",
+            "parameters" : [
+            
+                "title" : title,
+                "body" : body,
+                "urgency" : urgency
+            ]
+        ] as [String:AnyObject]
+        
+        requestWithInfo(info, andCompletion: { (responseInfo) -> Void in
+            println(responseInfo)
+            completion()
+        })
+    }
 
     
     
@@ -537,6 +620,59 @@ class RailsRequest: NSObject {
         })
     }
     
+    func getUserAppointmentsWithCompletion(completion: () -> Void) {
+        
+        var info = [
+        
+            "method" : "GET",
+            "endpoint" : "/user/\(givenUser!)/appointments"
+        ] as [String:AnyObject]
+        
+        requestWithArrayInfo(info, andCompletion: { (responseInfo) -> Void in
+            println("The response info is \(responseInfo)")
+            
+            if let userAppointmentsInfo = responseInfo as [[String:AnyObject]]? {
+                self.userAppointments = userAppointmentsInfo
+                completion()
+            }
+        })
+    }
+    
+    func carpoolAppointmentsWithCompletion(carpoolId: Int, completion: () -> Void) {
+        
+        var info = [
+        
+            "method" : "GET",
+            "endpoint" : "/carpool/\(carpoolId)/appointments"
+        ] as [String:AnyObject]
+        
+        requestWithArrayInfo(info, andCompletion: { (responseInfo) -> Void in
+            println("This is the carpool appointment index \(responseInfo)")
+            
+            if let carpoolAppointmentsInfo = responseInfo as [[String:AnyObject]]? {
+                self.carpoolAppointments = carpoolAppointmentsInfo
+                completion()
+            }
+        })
+    }
+    
+    func getPostsWithCompletion(carpoolId: Int, completion: () -> Void) {
+        
+        var info = [
+        
+            "method" : "GET",
+            "endpoint" : "/carpool/\(carpoolId)/posts"
+        ] as [String:AnyObject]
+        
+        requestWithArrayInfo(info, andCompletion: { (responseInfo) -> Void in
+            
+            if let postsInfo = responseInfo as [[String:AnyObject]]? {
+                self.posts = postsInfo
+                completion()
+            }
+        })
+    }
+    
     
     ///////////////////////////////////////////////////////////////////// PUT
     
@@ -545,7 +681,7 @@ class RailsRequest: NSObject {
         var info = [
             
             "method" : "PUT",
-            "endpoint" : "/user/\(ogUsername)",
+            "endpoint" : "/user/\(givenUser!)",
             "parameters" : [
                 
                 "username" : username, // required
@@ -829,7 +965,7 @@ class RailsRequest: NSObject {
         var info = [
         
             "method" : "DELETE",
-            "endpoint" : "carpool/\(carpoolId)/user/\(user)"
+            "endpoint" : "/carpool/\(carpoolId)/user/\(user)"
         ] as [String:AnyObject]
         
         requestWithInfo(info, andCompletion: { (responseInfo) -> Void in
@@ -841,6 +977,8 @@ class RailsRequest: NSObject {
     func requestWithInfo(info: [String:AnyObject], andCompletion completion: ((responseInfo: [String:AnyObject]?) -> Void)?) {
         
         let endpoint = info["endpoint"] as! String
+        
+        println(endpoint)
         
         if let url = NSURL(string:  API_URL + endpoint) {
             
@@ -881,17 +1019,24 @@ class RailsRequest: NSObject {
             
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: { (response, data, error) -> Void in
                 
+                println(response)
+                
                 if data != nil {
                 
-                if let json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil) as? [String:AnyObject] {
+                    if let json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil) as? [String:AnyObject] {
+                        
+                        completion?(responseInfo: json)
+                        
+                    } else {
+                        
+                        completion?(responseInfo: nil)
                     
-                    completion?(responseInfo: json)
+                    }
                     
                 } else {
                     
                     completion?(responseInfo: nil)
                     
-                    }
                 }
             })
         }

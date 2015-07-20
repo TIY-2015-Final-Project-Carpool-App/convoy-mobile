@@ -9,11 +9,28 @@
 import UIKit
 
 class CarpoolUserViewController: UIViewController {
+    
+    var userDetail: [String:AnyObject]?
+    
+    @IBOutlet weak var firstnameLabel: UILabel!
+    @IBOutlet weak var lastnameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        firstnameLabel?.text = userDetail?["first_name"] as? String
+        lastnameLabel?.text = userDetail?["last_name"] as? String
+        usernameLabel?.text = userDetail?["username"] as? String
+        addressLabel?.text = userDetail?["address"] as? String
+        emailLabel?.text = userDetail?["email"] as? String
+        phoneNumberLabel?.text = userDetail?["phone_number"] as? String
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

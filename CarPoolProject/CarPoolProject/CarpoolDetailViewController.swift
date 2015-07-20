@@ -14,6 +14,7 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
     var carpoolId: Int?
 
     @IBOutlet weak var carpoolUserTableView: UITableView!
+    @IBOutlet weak var userAppointmentTableView: UITableView!
 
     
     override func viewDidLoad() {
@@ -21,6 +22,14 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
         
         carpoolUserTableView.dataSource = self
         carpoolUserTableView.delegate = self
+        
+        userAppointmentTableView.delegate = self
+        userAppointmentTableView.dataSource = self
+        
+        RailsRequest.session().getUserAppointmentsWithCompletion { () -> Void in
+            
+            self.userAppointmentTableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,25 +39,51 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewWillAppear(animated: Bool) {
         carpoolUserTableView.reloadData()
+        RailsRequest.session().getUserAppointmentsWithCompletion { () -> Void in
+            
+            self.userAppointmentTableView.reloadData()
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users!.count
+        if (tableView == carpoolUserTableView) {
+            return users!.count
+        }
+        return RailsRequest.session().userAppointments.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("carpoolUserCell", forIndexPath: indexPath) as! CarpoolUserTableViewCell
-        
-        if let name = users![indexPath.row]["first_name"] as? String {
+        if (tableView == carpoolUserTableView) {
+            let cell = tableView.dequeueReusableCellWithIdentifier("carpoolUserCell", forIndexPath: indexPath) as! CarpoolUserTableViewCell
             
-            cell.nameLabel.text = name
+            if let name = users![indexPath.row]["first_name"] as? String {
+                
+                cell.nameLabel.text = name
+                cell.detailButton.tag = indexPath.row
+                cell.deleteUser.tag = indexPath.row
+            }
+            
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("appointmentCell", forIndexPath: indexPath) as! UserAppointmentTableViewCell
+            
             cell.detailButton.tag = indexPath.row
-            cell.deleteUser.tag = indexPath.row
+            cell.setMap.tag = indexPath.row
+            
+            if let creatorDetail = RailsRequest.session().userAppointments[indexPath.row]["creator"] as? [String:AnyObject] {
+            
+                if let creator = creatorDetail["username"] as? String {
+                    cell.creatorLabel.text = creator
+                }
+            }
+            cell.destinationLabel.text = RailsRequest.session().userAppointments[indexPath.row]["destination"] as? String
+            cell.roleLabel.text = RailsRequest.session().userAppointments[indexPath.row]["rider_role"] as? String
+            cell.titleLabel.text = RailsRequest.session().userAppointments[indexPath.row]["title"] as? String
+            
+            return cell
         }
-   
-        
-        return cell
     }
     
     func configurationTextField(textField: UITextField!) {
@@ -111,8 +146,18 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     
-    
+    @IBAction func setMapButton(sender: AnyObject) {
+        
+        if let cellButton = sender as? UIButton {
+            
+            chosenAppointmentIndex = cellButton.tag
+            
+            let mvc = storyboard?.instantiateViewControllerWithIdentifier("mapVC") as! MapViewController
+            presentViewController(mvc, animated: true, completion: nil)
+            
+        }
 
+    }
     
     // MARK: - Navigation
 
@@ -120,6 +165,40 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if let cellButton = sender as? UIButton {
+            
+            let userDetail = users![cellButton.tag]
+            
+            if let carpoolUserVC = segue.destinationViewController as? CarpoolUserViewController {
+                
+                carpoolUserVC.userDetail = userDetail
+            }
+        }
+        
+        if let cellButton = sender as? UIButton {
+            
+            if let createAppointmentVC = segue.destinationViewController as? CreateAppointmentViewController {
+                
+                createAppointmentVC.carpoolId = carpoolId!
+            }
+        }
+        
+        if let cellButton = sender as? UIButton {
+           let appointmentDetail = RailsRequest.session().userAppointments[cellButton.tag]
+            
+            if let userAppointmentVC = segue.destinationViewController as? UserAppointmentViewController {
+                userAppointmentVC.appointmentDetail = appointmentDetail
+            }
+        }
+        
+        if let joinButton = sender as? UIButton {
+            
+            if let carpoolAppointmentsVC = segue.destinationViewController as? CarpoolAppointmentViewController {
+                
+                carpoolAppointmentsVC.carpoolId = carpoolId!
+            }
+        }
     }
     
 

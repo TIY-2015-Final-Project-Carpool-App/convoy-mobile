@@ -8,96 +8,113 @@
 
 import UIKit
 import GoogleMaps
+import Swift
+
+var chosenAppointmentIndex = 0
 
 class MapViewController: UIViewController, GMSMapViewDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var startLatitude = 40.66813955408042
-        var startLongitude = -73.93386840820312
+        //chosenAppointmentIndex = 0
         
-        var startPoint = GMSCameraPosition.cameraWithLatitude(startLatitude, longitude: startLongitude, zoom: 12)
-        
-        var camera = startPoint
-        var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-        mapView.myLocationEnabled = false
-        mapView.indoorEnabled = false
-        view = mapView
-        
-        let startMarkerLocation = CLLocationCoordinate2D(latitude: startLatitude, longitude: startLongitude)
-        let startMarker = GMSMarker(position: startMarkerLocation)
-        startMarker.snippet = "Start point location"
-        startMarker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
-        startMarker.map = mapView
-        
-        
-        // run request for 4 from api
-        
-        // then loop through found locations and do the below code
-        var positions = [CLLocationCoordinate2D(latitude: 40.681679, longitude: -73.927002),
-                         CLLocationCoordinate2D(latitude: 40.671679, longitude: -73.927002),
-                         CLLocationCoordinate2D(latitude: 40.681679, longitude: -73.947002),
-                         CLLocationCoordinate2D(latitude: 40.681679, longitude: -73.977002),
-                         CLLocationCoordinate2D(latitude: 40.701689458715635, longitude: -73.947001953125),
-                         CLLocationCoordinate2D(latitude: 40.651689458715635, longitude: -73.947001953125) ]
-        
-        for p in positions {
-            
-            var marker = GMSMarker()
-            marker.position = p
-            
-            let geocoder = GMSGeocoder()
-            geocoder.reverseGeocodeCoordinate(p, completionHandler: { (response, error) -> Void in
-                
-                let responseResult = response.firstResult().lines
-                
-                marker.title = "\(responseResult[0] as! String), \(responseResult[1] as! String)"
-            })
-            
-            marker.map = mapView
-            
-        }
-        
-        let endLatitude = 40.681679
-        let endLongitude = -73.927002
-        
-        let endMarkerLocation = CLLocationCoordinate2D(latitude: endLatitude, longitude: endLongitude)
-        let endMarker = GMSMarker(position: endMarkerLocation)
-        endMarker.snippet = "End point location"
-        endMarker.icon = GMSMarker.markerImageWithColor(UIColor.blackColor())
-        
-        let geocoder = GMSGeocoder()
 
+            
+            RailsRequest.session().getUserAppointmentsWithCompletion { () -> Void in
+                
+                println("this is running")
+                var startLatitude = RailsRequest.session().userAppointments[chosenAppointmentIndex]["origin_latitude"] as? Double
+                var startLongitude = RailsRequest.session().userAppointments[chosenAppointmentIndex]["origin_longitude"] as? Double
+                
+                var startPoint = GMSCameraPosition.cameraWithLatitude(startLatitude!, longitude: startLongitude!, zoom: 7)
+                
+                var camera = startPoint
+                var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+                mapView.myLocationEnabled = false
+                mapView.indoorEnabled = false
+                self.view = mapView
 
-    
-        geocoder.reverseGeocodeCoordinate(endMarkerLocation, completionHandler: { (response, error) -> Void in
-        
-            let responseResult = response.firstResult().lines
-            
-            println(responseResult)
-            
-            println(responseResult[0])
-            
-            endMarker.title = "\(responseResult[0] as! String), \(responseResult[1] as! String)"
-        })
-        
-//        GoogleDirectionsDefinition *defn = [[GoogleDirectionsDefinition alloc] init];
-//        defn.startingPoint =
-//        [GoogleDirectionsWaypoint waypointWithQuery:@"221B Baker Street, London"];
-//        defn.destinationPoint = [GoogleDirectionsWaypoint
-//        waypointWithLocation:CLLocationCoordinate2DMake(51.498511, -0.133091)];
-//        defn.travelMode = kGoogleMapsTravelModeBiking;
-//        [[OpenInGoogleMapsController sharedInstance] openDirections:defn];
-        endMarker.map = mapView
-        
-        
-        
-        
-        
+                if let riders = RailsRequest.session().userAppointments[chosenAppointmentIndex]["riders"] as? [[String:AnyObject]] {
+                    
+                    var riderLocations: [CLLocationCoordinate2D] = []
+                    var distanceFromOrigin = 0
+                    
+                    for rider in riders {
+                        
+                        distanceFromOrigin = rider["distance_from_origin"] as! Int
+                        
+                        if let riderInfo = rider["rider"] as? [String:AnyObject] {
+                            
+                            if let lat = riderInfo["latitude"] as? Double, lng = riderInfo["longitude"] as? Double {
+                                
+                                riderLocations.append(CLLocationCoordinate2D(latitude: lat, longitude: lng))
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    for r in riderLocations {
+                        
+                        var marker = GMSMarker()
+                        marker.position = r
+                        marker.snippet = "The rider is \(distanceFromOrigin) miles from start point"
+                        marker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+                        
+                        let geocoder = GMSGeocoder()
+                        geocoder.reverseGeocodeCoordinate(r, completionHandler: { (response, error) -> Void in
+                            
+                            let responseResult = response.firstResult().lines
+                            
+                            marker.title = "\(responseResult[0] as! String), \(responseResult[1] as! String)"
+                        })
+                        
+                        marker.map = mapView
+                        
+                    }
+                    
+                }
+                
+                
+                
+                let endLatitude = RailsRequest.session().userAppointments[chosenAppointmentIndex]["destination_latitude"] as? Double
+                let endLongitude = RailsRequest.session().userAppointments[chosenAppointmentIndex]["destination_longitude"] as? Double
+                
+                let endMarkerLocation = CLLocationCoordinate2D(latitude: endLatitude!, longitude: endLongitude!)
+                let endMarker = GMSMarker(position: endMarkerLocation)
+                endMarker.snippet = "End point location"
+                endMarker.icon = GMSMarker.markerImageWithColor(UIColor.blackColor())
+                
+                let startMarkerLocation = CLLocationCoordinate2D(latitude: startLatitude!, longitude: startLongitude!)
+                let startMarker = GMSMarker(position: startMarkerLocation)
+                startMarker.snippet = "Start point location"
+                startMarker.icon = GMSMarker.markerImageWithColor(UIColor.blackColor())
+                startMarker.map = mapView
+               
+                
+                let geocoder = GMSGeocoder()
+                
+                
+                
+                geocoder.reverseGeocodeCoordinate(endMarkerLocation, completionHandler: { (response, error) -> Void in
+                    
+                    let responseResult = response.firstResult().lines
+                    
+                    println(responseResult)
+                    
+                    println(responseResult[0])
+                    
+                    endMarker.title = "\(responseResult[0] as! String), \(responseResult[1] as! String)"
+                })
+                
+                
+                endMarker.map = mapView
+            }
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

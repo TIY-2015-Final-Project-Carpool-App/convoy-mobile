@@ -8,22 +8,11 @@
 
 import UIKit
 
-let textArray = [
-
-    "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna",
-    
-    "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna",
-    
-    "Lorem ipsum dolor sit er elit lamet",
-    
-    "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna  Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna "
-
-]
-
 class BulletinTableViewController: UITableViewController {
     
+    var carpoolId: Int?
+    
     @IBOutlet var bulletinTableView: UITableView!
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +40,11 @@ class BulletinTableViewController: UITableViewController {
       //  bulletinTableView.rowHeight = UITableViewAutomaticDimension
         
 //        self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections())), withRowAnimation: .None)
+        
+        RailsRequest.session().getPostsWithCompletion(carpoolId!, completion: { () -> Void in
+            
+            self.bulletinTableView.reloadData()
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,19 +63,24 @@ class BulletinTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return textArray.count
+        return RailsRequest.session().posts.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("bulletinCell2", forIndexPath: indexPath) as! BulletinTableViewCell
-
         
-        /// textarray remove
-        
-        let text = textArray[indexPath.row]
+        let text = RailsRequest.session().posts[indexPath.row]["body"] as? String
         
         cell.bulletinTextView.text = text
+        
+        let postInfo = RailsRequest.session().posts[indexPath.row]
+            
+            if let user = postInfo["user"] as? [String:AnyObject] {
+                
+              let username = user["username"] as? String
+            }
+        
         
         
         // Configure the cell...
@@ -117,7 +116,7 @@ class BulletinTableViewController: UITableViewController {
         
         let textView = UITextView(frame: CGRect(x: 0, y: 0, width: 440, height: 1000))
         
-        let text = textArray[indexPath.row]
+        let text = RailsRequest.session().posts[indexPath.row]["body"] as? String
         
         textView.text = text
         
@@ -177,14 +176,22 @@ class BulletinTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
+        if let barButton = sender as? UIButton {
+            
+            if let createPostVC = segue.destinationViewController as? CreatePostViewController {
+                
+                createPostVC.carpoolId = carpoolId!
+            }
+        }
     }
-    */
+    
 
 }

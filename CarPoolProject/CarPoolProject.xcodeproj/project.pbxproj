@@ -46,6 +46,15 @@
 		E82A5FD51B46222600620154 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82A5FD41B46222600620154 /* DashboardTableViewCell.swift */; };
 		E82A5FD81B462A2C00620154 /* RailsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82A5FD71B462A2C00620154 /* RailsRequest.swift */; };
 		E82DBD9F1B50051300130026 /* ChildrenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82DBD9E1B50051300130026 /* ChildrenTableViewCell.swift */; };
+		E83CFB751B5B2808007FACDC /* UserAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB741B5B2808007FACDC /* UserAppointmentViewController.swift */; };
+		E83CFB771B5B606D007FACDC /* CarpoolAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB761B5B606D007FACDC /* CarpoolAppointmentViewController.swift */; };
+		E83CFB791B5B779C007FACDC /* CarpoolAppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB781B5B779C007FACDC /* CarpoolAppointmentTableViewCell.swift */; };
+		E83CFB7B1B5BFF27007FACDC /* CarpoolAppointmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB7A1B5BFF27007FACDC /* CarpoolAppointmentDetailViewController.swift */; };
+		E83CFB7D1B5BFFC8007FACDC /* JoinAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB7C1B5BFFC8007FACDC /* JoinAppointmentViewController.swift */; };
+		E83CFB7F1B5C0223007FACDC /* JoinAppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB7E1B5C0223007FACDC /* JoinAppointmentTableViewCell.swift */; };
+		E83CFB811B5C3B9C007FACDC /* CarpoolBulletinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB801B5C3B9C007FACDC /* CarpoolBulletinTableViewCell.swift */; };
+		E83CFB831B5C3C71007FACDC /* CarpoolBulletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB821B5C3C71007FACDC /* CarpoolBulletionViewController.swift */; };
+		E83CFB851B5C4AC6007FACDC /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CFB841B5C4AC6007FACDC /* CreatePostViewController.swift */; };
 		E840D92C1B56F4EE003B81F5 /* CarpoolUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E840D92B1B56F4EE003B81F5 /* CarpoolUserTableViewCell.swift */; };
 		E84888851B5762DB00E26E35 /* InvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84888841B5762DB00E26E35 /* InvitationTableViewCell.swift */; };
 		E84888871B589B2200E26E35 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84888861B589B2200E26E35 /* DashboardViewController.swift */; };
@@ -63,6 +72,7 @@
 		E87724A31B4E53B300117484 /* UpdateChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87724A21B4E53B300117484 /* UpdateChildViewController.swift */; };
 		E8AAF5F21B52D5FD0097510B /* UserContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AAF5F11B52D5FD0097510B /* UserContactsViewController.swift */; };
 		E8AAF5F41B52DB600097510B /* CreateUserContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AAF5F31B52DB600097510B /* CreateUserContactsViewController.swift */; };
+		E8B19D351B5ACF1E000810C9 /* UserAppointmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B19D341B5ACF1E000810C9 /* UserAppointmentTableViewCell.swift */; };
 		E8B28F461B49908A00BA7C57 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B28F451B49908A00BA7C57 /* WelcomeViewController.swift */; };
 		E8B28F4C1B49A96700BA7C57 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B28F4B1B49A96700BA7C57 /* LoginViewController.swift */; };
 		E8B28F4E1B49A97900BA7C57 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B28F4D1B49A97900BA7C57 /* SignupViewController.swift */; };
@@ -132,6 +142,15 @@
 		E82A5FD41B46222600620154 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		E82A5FD71B462A2C00620154 /* RailsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RailsRequest.swift; sourceTree = "<group>"; };
 		E82DBD9E1B50051300130026 /* ChildrenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildrenTableViewCell.swift; sourceTree = "<group>"; };
+		E83CFB741B5B2808007FACDC /* UserAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAppointmentViewController.swift; sourceTree = "<group>"; };
+		E83CFB761B5B606D007FACDC /* CarpoolAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarpoolAppointmentViewController.swift; sourceTree = "<group>"; };
+		E83CFB781B5B779C007FACDC /* CarpoolAppointmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarpoolAppointmentTableViewCell.swift; sourceTree = "<group>"; };
+		E83CFB7A1B5BFF27007FACDC /* CarpoolAppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarpoolAppointmentDetailViewController.swift; sourceTree = "<group>"; };
+		E83CFB7C1B5BFFC8007FACDC /* JoinAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinAppointmentViewController.swift; sourceTree = "<group>"; };
+		E83CFB7E1B5C0223007FACDC /* JoinAppointmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinAppointmentTableViewCell.swift; sourceTree = "<group>"; };
+		E83CFB801B5C3B9C007FACDC /* CarpoolBulletinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarpoolBulletinTableViewCell.swift; sourceTree = "<group>"; };
+		E83CFB821B5C3C71007FACDC /* CarpoolBulletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarpoolBulletionViewController.swift; sourceTree = "<group>"; };
+		E83CFB841B5C4AC6007FACDC /* CreatePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		E840D92B1B56F4EE003B81F5 /* CarpoolUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarpoolUserTableViewCell.swift; sourceTree = "<group>"; };
 		E84888841B5762DB00E26E35 /* InvitationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationTableViewCell.swift; sourceTree = "<group>"; };
 		E84888861B589B2200E26E35 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +168,7 @@
 		E87724A21B4E53B300117484 /* UpdateChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChildViewController.swift; sourceTree = "<group>"; };
 		E8AAF5F11B52D5FD0097510B /* UserContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserContactsViewController.swift; sourceTree = "<group>"; };
 		E8AAF5F31B52DB600097510B /* CreateUserContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserContactsViewController.swift; sourceTree = "<group>"; };
+		E8B19D341B5ACF1E000810C9 /* UserAppointmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAppointmentTableViewCell.swift; sourceTree = "<group>"; };
 		E8B28F451B49908A00BA7C57 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		E8B28F4B1B49A96700BA7C57 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E8B28F4D1B49A97900BA7C57 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +297,9 @@
 			children = (
 				E84888861B589B2200E26E35 /* DashboardViewController.swift */,
 				E86DCE9C1B48979C00BAE3AD /* CarpoolDetailViewController.swift */,
+				E8C3F5691B562045001AC50D /* CreateAppointmentViewController.swift */,
+				E83CFB741B5B2808007FACDC /* UserAppointmentViewController.swift */,
+				E83CFB761B5B606D007FACDC /* CarpoolAppointmentViewController.swift */,
 				E877249E1B4E10EA00117484 /* SettingsViewController.swift */,
 				E87724A01B4E218900117484 /* CreateChildViewController.swift */,
 				E87724A21B4E53B300117484 /* UpdateChildViewController.swift */,
@@ -291,7 +314,8 @@
 				E8C3F5631B561AB7001AC50D /* CarpoolUserViewController.swift */,
 				E8C3F5651B561B6F001AC50D /* AnswerInvitesViewController.swift */,
 				E8C3F5671B561E9B001AC50D /* InviteDetailViewController.swift */,
-				E8C3F5691B562045001AC50D /* CreateAppointmentViewController.swift */,
+				E83CFB7A1B5BFF27007FACDC /* CarpoolAppointmentDetailViewController.swift */,
+				E83CFB7C1B5BFFC8007FACDC /* JoinAppointmentViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -339,6 +363,9 @@
 				E85370061B5404680052256D /* UserContactTableViewCell.swift */,
 				E840D92B1B56F4EE003B81F5 /* CarpoolUserTableViewCell.swift */,
 				E84888841B5762DB00E26E35 /* InvitationTableViewCell.swift */,
+				E8B19D341B5ACF1E000810C9 /* UserAppointmentTableViewCell.swift */,
+				E83CFB781B5B779C007FACDC /* CarpoolAppointmentTableViewCell.swift */,
+				E83CFB7E1B5C0223007FACDC /* JoinAppointmentTableViewCell.swift */,
 			);
 			name = Irregulars;
 			sourceTree = "<group>";
@@ -389,7 +416,9 @@
 		E86DCE971B4858E800BAE3AD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E83CFB821B5C3C71007FACDC /* CarpoolBulletionViewController.swift */,
 				E82A5F9C1B45E47C00620154 /* BulletinTableViewController.swift */,
+				E83CFB841B5C4AC6007FACDC /* CreatePostViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -397,6 +426,7 @@
 		E86DCE9E1B48A7FE00BAE3AD /* Irregulars */ = {
 			isa = PBXGroup;
 			children = (
+				E83CFB801B5C3B9C007FACDC /* CarpoolBulletinTableViewCell.swift */,
 				E86DCE9F1B48A82100BAE3AD /* BulletinTableViewCell.swift */,
 			);
 			name = Irregulars;
@@ -572,6 +602,7 @@
 				E82A5FC21B45E51A00620154 /* CVCalendarTouchController.swift in Sources */,
 				E86DCE921B4849E500BAE3AD /* CreateCarPoolButton.swift in Sources */,
 				E87724A11B4E218900117484 /* CreateChildViewController.swift in Sources */,
+				E83CFB831B5C3C71007FACDC /* CarpoolBulletionViewController.swift in Sources */,
 				E8C3F56A1B562045001AC50D /* CreateAppointmentViewController.swift in Sources */,
 				E84888871B589B2200E26E35 /* DashboardViewController.swift in Sources */,
 				E82A5F0A1B45902C00620154 /* AppDelegate.swift in Sources */,
@@ -582,6 +613,7 @@
 				E82A5FB91B45E51A00620154 /* CVAuxiliaryView.swift in Sources */,
 				E840D92C1B56F4EE003B81F5 /* CarpoolUserTableViewCell.swift in Sources */,
 				E82A5FC71B45E51A00620154 /* CVCalendarViewAppearanceDelegate.swift in Sources */,
+				E8B19D351B5ACF1E000810C9 /* UserAppointmentTableViewCell.swift in Sources */,
 				E877249D1B4DA1B400117484 /* CarPoolTabBarController.swift in Sources */,
 				E8B7F91A1B51FB38009E1FCE /* EmergencyContactsViewController.swift in Sources */,
 				E8C3F5661B561B6F001AC50D /* AnswerInvitesViewController.swift in Sources */,
@@ -589,13 +621,18 @@
 				E82A5FCE1B45E51A00620154 /* CVRange.swift in Sources */,
 				E8B7F9181B51897F009E1FCE /* MedicalViewController.swift in Sources */,
 				E8AAF5F41B52DB600097510B /* CreateUserContactsViewController.swift in Sources */,
+				E83CFB791B5B779C007FACDC /* CarpoolAppointmentTableViewCell.swift in Sources */,
 				E8AAF5F21B52D5FD0097510B /* UserContactsViewController.swift in Sources */,
 				E82A5FBD1B45E51A00620154 /* CVCalendarManager.swift in Sources */,
 				E82A5FCB1B45E51A00620154 /* CVCalendarWeekday.swift in Sources */,
 				E87724A31B4E53B300117484 /* UpdateChildViewController.swift in Sources */,
 				E86DCE9D1B48979C00BAE3AD /* CarpoolDetailViewController.swift in Sources */,
+				E83CFB7B1B5BFF27007FACDC /* CarpoolAppointmentDetailViewController.swift in Sources */,
 				E86DCEA01B48A82100BAE3AD /* BulletinTableViewCell.swift in Sources */,
 				E84888851B5762DB00E26E35 /* InvitationTableViewCell.swift in Sources */,
+				E83CFB771B5B606D007FACDC /* CarpoolAppointmentViewController.swift in Sources */,
+				E83CFB7D1B5BFFC8007FACDC /* JoinAppointmentViewController.swift in Sources */,
+				E83CFB811B5C3B9C007FACDC /* CarpoolBulletinTableViewCell.swift in Sources */,
 				E82A5FC01B45E51A00620154 /* CVCalendarMonthContentViewController.swift in Sources */,
 				E82A5FCD1B45E51A00620154 /* CVDate.swift in Sources */,
 				E82A5FC61B45E51A00620154 /* CVCalendarViewAppearance.swift in Sources */,
@@ -603,11 +640,13 @@
 				E82A5FC11B45E51A00620154 /* CVCalendarMonthView.swift in Sources */,
 				E82A5FC51B45E51A00620154 /* CVCalendarViewAnimatorDelegate.swift in Sources */,
 				E877249F1B4E10EA00117484 /* SettingsViewController.swift in Sources */,
+				E83CFB7F1B5C0223007FACDC /* JoinAppointmentTableViewCell.swift in Sources */,
 				E82A5FD81B462A2C00620154 /* RailsRequest.swift in Sources */,
 				E82A5FCC1B45E51A00620154 /* CVCalendarWeekView.swift in Sources */,
 				E82A5FC31B45E51A00620154 /* CVCalendarView.swift in Sources */,
 				E82A5FBF1B45E51A00620154 /* CVCalendarMenuViewDelegate.swift in Sources */,
 				E82A5FD21B45E51A00620154 /* CVShape.swift in Sources */,
+				E83CFB851B5C4AC6007FACDC /* CreatePostViewController.swift in Sources */,
 				E85C062F1B5340D00030F4B9 /* UpdateUserContactsViewController.swift in Sources */,
 				E85C06311B53440D0030F4B9 /* UpdateChildContactViewController.swift in Sources */,
 				E8B28F4C1B49A96700BA7C57 /* LoginViewController.swift in Sources */,
@@ -626,6 +665,7 @@
 				E8C3F5681B561E9B001AC50D /* InviteDetailViewController.swift in Sources */,
 				E82A5F9B1B45DC6200620154 /* MapViewController.swift in Sources */,
 				E8C3F5641B561AB7001AC50D /* CarpoolUserViewController.swift in Sources */,
+				E83CFB751B5B2808007FACDC /* UserAppointmentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

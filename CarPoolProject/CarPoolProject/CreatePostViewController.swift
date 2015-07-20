@@ -1,24 +1,20 @@
 //
-//  CreateAppointmentViewController.swift
+//  CreatePostViewController.swift
 //  CarPoolProject
 //
-//  Created by Christopher Wainwright Aaron on 7/15/15.
+//  Created by Christopher Wainwright Aaron on 7/19/15.
 //  Copyright (c) 2015 Christopher Wainwright Aaron. All rights reserved.
 //
 
 import UIKit
 
-class CreateAppointmentViewController: UIViewController {
+class CreatePostViewController: UIViewController {
     
     var carpoolId: Int?
     
-    @IBOutlet weak var startField: UITextField!
     @IBOutlet weak var titleField: UITextField!
-    @IBOutlet weak var descriptionField: UITextField!
-    @IBOutlet weak var originField: UITextField!
-    @IBOutlet weak var destinationField: UITextField!
-    @IBOutlet weak var filterField: UITextField!
-    
+    @IBOutlet weak var postBody: UITextView!
+    @IBOutlet weak var urgencyField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,20 +28,17 @@ class CreateAppointmentViewController: UIViewController {
     }
     
     
-    @IBAction func ceateAppointment(sender: AnyObject) {
+    @IBAction func createPost(sender: AnyObject) {
         
-        RailsRequest.session().start = startField.text
         RailsRequest.session().title = titleField.text
-        RailsRequest.session().descript = descriptionField.text
-        RailsRequest.session().origin = originField.text
-        RailsRequest.session().destination = destinationField.text
-        RailsRequest.session().distanceFilter = filterField.text.toInt()!
+        RailsRequest.session().body = postBody.text
+        RailsRequest.session().urgency = urgencyField.text
         
-        RailsRequest.session().createAppointmentWithCompletion(carpoolId!, completion: { () -> Void in
+        RailsRequest.session().createPostWithCompletion(carpoolId!) { () -> Void in
             
-            println("succesfully made appointment")
             self.dismissViewControllerAnimated(false, completion: nil)
-        })
+        }
+        
     }
     
 
