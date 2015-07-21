@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate {
 
     @IBOutlet weak var menuView: CVCalendarMenuView!
@@ -33,6 +34,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             self.carpoolTableView.reloadData()
         }
         
+        RailsRequest.session().getUserAppointmentsWithCompletion { () -> Void in
+            println("this is ran")
+            
+            self.calendarView.commitCalendarViewUpdate()
+            self.menuView.commitMenuViewUpdate()
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,15 +55,15 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        calendarView.commitCalendarViewUpdate()
-        menuView.commitMenuViewUpdate()
+//        calendarView.commitCalendarViewUpdate()
+//        menuView.commitMenuViewUpdate()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        calendarView.commitCalendarViewUpdate()
-        menuView.commitMenuViewUpdate()
+//        calendarView.commitCalendarViewUpdate()
+//        menuView.commitMenuViewUpdate()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -245,8 +253,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
 
-
-
 }
 
 extension DashboardViewController: CVCalendarViewDelegate
@@ -254,14 +260,51 @@ extension DashboardViewController: CVCalendarViewDelegate
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView
     {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
-        circleView.fillColor = .colorFromCode(0xCCCCCC)
+        circleView.fillColor = UIColor.greenColor()//.colorFromCode(0xCCCCCC)
         return circleView
     }
     
     func preliminaryView(shouldDisplayOnDayView dayView: DayView) -> Bool
     {
-        if (dayView.isCurrentDay) {
-            return true
+        // array of events
+        let events: [[String:AnyObject]] = RailsRequest.session().userAppointments
+        
+        
+        if !events.isEmpty {
+//        println("These are the events \(events)")
+            
+        for event in events {
+            
+            if let start = event["start"] as? String {
+                
+                let dateFormatter = NSDateFormatter()
+                let dateString = start
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'.000'zzzz"
+                dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+                let date = dateFormatter.dateFromString(dateString)//as? CVDate
+//                println(" This is the date: \(date)")
+//                println(" This is the converted date: \(dayView.date.convertedDate())")
+                
+//                println("--------------------------------------------------")
+//                println("\(floor(dayView.date.convertedDate()!.timeIntervalSince1970 / (3600 * 24))) == \(floor(date!.timeIntervalSince1970 / (3600 * 24)))")
+                
+                if let cDate = dayView.date {
+                    
+                    if let cvDate = cDate.convertedDate(), evDate = date {
+                        
+                        if (floor(cvDate.timeIntervalSince1970 / (3600 * 24)) == floor(evDate.timeIntervalSince1970 / (3600 * 24))) {
+                            return true
+                        }
+                        
+                    }
+                    
+                }
+                
+                
+                
+            }
+            
+        }
         }
         return false
     }

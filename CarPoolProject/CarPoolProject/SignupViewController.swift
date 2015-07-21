@@ -15,6 +15,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIAlertViewDe
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var lastnameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var addressField: UITextField!
     
 
     override func viewDidLoad() {
@@ -51,6 +52,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate, UIAlertViewDe
         RailsRequest.session().firstName = firstname
         RailsRequest.session().lastName = lastname
         RailsRequest.session().email = email
+        RailsRequest.session().address = addressField.text
         
         if username.isEmpty || password.isEmpty || firstname.isEmpty || lastname.isEmpty || email.isEmpty {
             

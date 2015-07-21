@@ -25,6 +25,10 @@ class CreateAppointmentViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

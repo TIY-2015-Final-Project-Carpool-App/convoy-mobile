@@ -105,6 +105,7 @@ class RailsRequest: NSObject {
     
     var body = ""
     var urgency = ""
+    var seat = 5
     
     ////////////////////////////////////////////////////////////// POST
     
@@ -387,7 +388,7 @@ class RailsRequest: NSObject {
             "endpoint" : "/carpool/\(carpoolId)",
             "parameters" : [
             
-                "email" : [email]
+                "emails" : [email]
             ]
         ] as [String:AnyObject]
         
@@ -411,7 +412,8 @@ class RailsRequest: NSObject {
                 "description" : descript,
                 "origin" : origin,
                 "destination" : destination,
-                "distance_filter" : distanceFilter
+                "distance_filter" : distanceFilter,
+                "seats" : seat
             ]
         ] as [String:AnyObject]
         
@@ -423,6 +425,8 @@ class RailsRequest: NSObject {
     }
     
     func joinAppointmentWithCompletion(appointmentId: Int, completion: () -> Void) {
+        
+        if givenUser == nil { return }
         
         var info = [
         
@@ -479,6 +483,8 @@ class RailsRequest: NSObject {
     
     func getUserInfoWithCompletion(completion: () -> Void) {
         
+        if givenUser == nil { return }
+        
         var info = [
             
             "method" : "GET",
@@ -522,6 +528,8 @@ class RailsRequest: NSObject {
     }
     
     func getChildrenIndexWithCompletion(completion: () -> Void) {
+        
+        if givenUser == nil { return }
         
         var info = [
             
@@ -568,6 +576,8 @@ class RailsRequest: NSObject {
     
     func getUserContactIndexWithCompletion(completion: () -> Void) {
         
+        if givenUser == nil { return }
+        
         var info = [
         
             "method" : "GET",
@@ -588,6 +598,8 @@ class RailsRequest: NSObject {
     
     func getCarpoolIndexWithCompletion(completion: () -> Void) {
         
+        if givenUser == nil { return }
+        
         var info = [
         
             "method" : "GET",
@@ -604,6 +616,8 @@ class RailsRequest: NSObject {
     }
     
     func getPendingInvitesWithCompletion(completion: () -> Void) {
+        
+        if givenUser == nil { return }
         
         var info = [
         
@@ -629,7 +643,7 @@ class RailsRequest: NSObject {
         ] as [String:AnyObject]
         
         requestWithArrayInfo(info, andCompletion: { (responseInfo) -> Void in
-            println("The response info is \(responseInfo)")
+//            println("The response info is \(responseInfo)")
             
             if let userAppointmentsInfo = responseInfo as [[String:AnyObject]]? {
                 self.userAppointments = userAppointmentsInfo
@@ -1087,7 +1101,7 @@ class RailsRequest: NSObject {
             
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: { (response, data, error) -> Void in
                 
-                println(data)
+//                println(data)
                 
                 if let json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: nil) as? [[String:AnyObject]] {
                     
