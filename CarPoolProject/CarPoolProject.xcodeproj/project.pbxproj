@@ -226,6 +226,20 @@
 			name = Specials;
 			sourceTree = "<group>";
 		};
+		E80EF09F1B5F3BFB00947DC0 /* Carpool Flow */ = {
+			isa = PBXGroup;
+			children = (
+				E86DCE9C1B48979C00BAE3AD /* CarpoolDetailViewController.swift */,
+				E8C3F5691B562045001AC50D /* CreateAppointmentViewController.swift */,
+				E83CFB741B5B2808007FACDC /* UserAppointmentViewController.swift */,
+				E83CFB7A1B5BFF27007FACDC /* CarpoolAppointmentDetailViewController.swift */,
+				E83CFB761B5B606D007FACDC /* CarpoolAppointmentViewController.swift */,
+				E8C3F5631B561AB7001AC50D /* CarpoolUserViewController.swift */,
+				E83CFB7C1B5BFFC8007FACDC /* JoinAppointmentViewController.swift */,
+			);
+			name = "Carpool Flow";
+			sourceTree = "<group>";
+		};
 		E82A5EFB1B45902C00620154 = {
 			isa = PBXGroup;
 			children = (
@@ -296,10 +310,8 @@
 			isa = PBXGroup;
 			children = (
 				E84888861B589B2200E26E35 /* DashboardViewController.swift */,
-				E86DCE9C1B48979C00BAE3AD /* CarpoolDetailViewController.swift */,
-				E8C3F5691B562045001AC50D /* CreateAppointmentViewController.swift */,
-				E83CFB741B5B2808007FACDC /* UserAppointmentViewController.swift */,
-				E83CFB761B5B606D007FACDC /* CarpoolAppointmentViewController.swift */,
+				E89857621B5F166E008E242F /* Invite Flow */,
+				E80EF09F1B5F3BFB00947DC0 /* Carpool Flow */,
 				E877249E1B4E10EA00117484 /* SettingsViewController.swift */,
 				E87724A01B4E218900117484 /* CreateChildViewController.swift */,
 				E87724A21B4E53B300117484 /* UpdateChildViewController.swift */,
@@ -311,11 +323,6 @@
 				E85C06301B53440D0030F4B9 /* UpdateChildContactViewController.swift */,
 				E85C06321B5344270030F4B9 /* UpdateMedicalViewController.swift */,
 				E80B60B21B538088006136EA /* EmergencyContactListViewController.swift */,
-				E8C3F5631B561AB7001AC50D /* CarpoolUserViewController.swift */,
-				E8C3F5651B561B6F001AC50D /* AnswerInvitesViewController.swift */,
-				E8C3F5671B561E9B001AC50D /* InviteDetailViewController.swift */,
-				E83CFB7A1B5BFF27007FACDC /* CarpoolAppointmentDetailViewController.swift */,
-				E83CFB7C1B5BFFC8007FACDC /* JoinAppointmentViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -430,6 +437,15 @@
 				E86DCE9F1B48A82100BAE3AD /* BulletinTableViewCell.swift */,
 			);
 			name = Irregulars;
+			sourceTree = "<group>";
+		};
+		E89857621B5F166E008E242F /* Invite Flow */ = {
+			isa = PBXGroup;
+			children = (
+				E8C3F5651B561B6F001AC50D /* AnswerInvitesViewController.swift */,
+				E8C3F5671B561E9B001AC50D /* InviteDetailViewController.swift */,
+			);
+			name = "Invite Flow";
 			sourceTree = "<group>";
 		};
 		E8B28F441B49905D00BA7C57 /* Login Flow */ = {

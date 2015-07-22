@@ -13,6 +13,7 @@ class InvitationTableViewCell: UITableViewCell {
     @IBOutlet weak var detailButton: UIButton!
     @IBOutlet weak var carpoolTitleLabel: UILabel!
     @IBOutlet weak var acceptInviteButton: UIButton!
+    @IBOutlet weak var declineInviteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

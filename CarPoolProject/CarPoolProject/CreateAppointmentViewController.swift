@@ -52,6 +52,11 @@ class CreateAppointmentViewController: UIViewController {
         })
     }
     
+    @IBAction func cancelButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+
 
     /*
     // MARK: - Navigation

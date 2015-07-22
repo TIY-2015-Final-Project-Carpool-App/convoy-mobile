@@ -46,6 +46,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewWillAppear(animated: Bool) {
             carpoolTableView.reloadData()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -64,6 +65,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
 //        calendarView.commitCalendarViewUpdate()
 //        menuView.commitMenuViewUpdate()
+        if RailsRequest.session().givenUser == nil {
+        
+            let wvc = storyboard?.instantiateViewControllerWithIdentifier("welcomeVC") as! WelcomeViewController
+            presentViewController(wvc, animated: true, completion: nil)
+            
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

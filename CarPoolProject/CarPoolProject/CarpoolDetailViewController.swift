@@ -26,6 +26,9 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
         userAppointmentTableView.delegate = self
         userAppointmentTableView.dataSource = self
         
+        carpoolUserTableView.backgroundColor = UIColor.clearColor()
+        userAppointmentTableView.backgroundColor = UIColor.clearColor()
+        
         RailsRequest.session().getUserAppointmentsWithCompletion { () -> Void in
             
             self.userAppointmentTableView.reloadData()
@@ -63,7 +66,7 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
                 cell.detailButton.tag = indexPath.row
                 cell.deleteUser.tag = indexPath.row
             }
-            
+            cell.backgroundColor = UIColor.clearColor()
             
             return cell
         } else {
@@ -81,6 +84,8 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
             cell.destinationLabel.text = RailsRequest.session().userAppointments[indexPath.row]["destination"] as? String
             cell.roleLabel.text = RailsRequest.session().userAppointments[indexPath.row]["rider_role"] as? String
             cell.titleLabel.text = RailsRequest.session().userAppointments[indexPath.row]["title"] as? String
+            
+            cell.backgroundColor = UIColor.clearColor()
             
             return cell
         }
@@ -158,6 +163,20 @@ class CarpoolDetailViewController: UIViewController, UITableViewDataSource, UITa
         }
 
     }
+    
+
+    @IBAction func backButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+        
+        
+        //let dvc = storyboard?.instantiateViewControllerWithIdentifier("dashoboardVC") as! DashboardViewController
+        //presentViewController(dvc, animated: true, completion: nil)
+
+        
+        //navigationController?.popViewControllerAnimated(true)
+    }
+    
     
     // MARK: - Navigation
 

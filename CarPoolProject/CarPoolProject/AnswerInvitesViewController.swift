@@ -23,6 +23,8 @@ class AnswerInvitesViewController: UIViewController, UITableViewDelegate, UITabl
             self.invitationsTableView.reloadData()
         }
         
+        invitationsTableView.backgroundColor = UIColor.clearColor()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,9 +44,12 @@ class AnswerInvitesViewController: UIViewController, UITableViewDelegate, UITabl
             if let carpoolTitle = carpool["title"] as? String {
                 cell.carpoolTitleLabel.text = carpoolTitle
                 cell.detailButton.tag = indexPath.row
+                
             }
             
         }
+        cell.declineInviteButton.tag = indexPath.row
+        cell.backgroundColor = UIColor.clearColor()
         
         return cell
     }
@@ -58,7 +63,6 @@ class AnswerInvitesViewController: UIViewController, UITableViewDelegate, UITabl
     @IBAction func acceptInvite(sender: UIButton) {
         
         let acceptButton = sender
-        
         
         
         if let theCarpool = RailsRequest.session().invites[acceptButton.tag]["carpool"] as? [String:AnyObject] {
@@ -93,6 +97,27 @@ class AnswerInvitesViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    @IBAction func backButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
+    
+    @IBAction func declineButton(sender: AnyObject) {
+        
+        if let cellButton = sender as? UIButton {
+            
+            let inviteId = RailsRequest.session().invites[cellButton.tag]["id"] as! Int
+            
+            RailsRequest.session().declineInviteWithCompletion(inviteId, completion: { () -> Void in
+                RailsRequest.session().invites.removeAtIndex(cellButton.tag)
+                self.invitationsTableView.reloadData()
+                println("the invite has been decline")
+                
+            })
+        }
+    }
+
 
     
     // MARK: - Navigation

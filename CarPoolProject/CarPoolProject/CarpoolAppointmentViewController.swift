@@ -19,6 +19,8 @@ class CarpoolAppointmentViewController: UIViewController, UITableViewDataSource,
         carpoolAppointmentTableView.dataSource = self
         carpoolAppointmentTableView.delegate = self
         
+        carpoolAppointmentTableView.backgroundColor = UIColor.clearColor()
+        
         RailsRequest.session().carpoolAppointmentsWithCompletion(carpoolId!, completion: { () -> Void in
             
             self.carpoolAppointmentTableView.reloadData()
@@ -56,9 +58,16 @@ class CarpoolAppointmentViewController: UIViewController, UITableViewDataSource,
         cell.detailButton.tag = indexPath.row
         cell.joinAppointment.tag = indexPath.row
         
+        cell.backgroundColor = UIColor.clearColor()
+        
         return cell
     }
     
+    @IBAction func backButton(sender: AnyObject) {
+        
+       // navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(false, completion: nil)
+    }
 
     
     // MARK: - Navigation

@@ -189,10 +189,30 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIAlertView
     
     @IBAction func addOrUpdateChildButton(sender: AnyObject) {
         
-        let ccvc = storyboard?.instantiateViewControllerWithIdentifier("createChildVC") as! CreateChildViewController
-        presentViewController(ccvc, animated: true, completion: nil)
+     //   let ccvc = storyboard?.instantiateViewControllerWithIdentifier("createChildVC") as! CreateChildViewController
+       // navigationController?.popToRootViewControllerAnimated(true)
+        
     }
     
+    
+    @IBAction func logout(sender: AnyObject) {
+        
+        RailsRequest.session().givenUser = nil
+        RailsRequest.session().token = nil
+        
+        if RailsRequest.session().givenUser == nil {
+            
+            let wvc = storyboard?.instantiateViewControllerWithIdentifier("welcomeVC") as! WelcomeViewController
+            
+            presentViewController(wvc, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func backButton(sender: AnyObject) {
+        
+        let dvc = storyboard?.instantiateViewControllerWithIdentifier("dashoboardVC") as! DashboardViewController
+        presentViewController(dvc, animated: true, completion: nil)
+    }
 
     // MARK: - Navigation
 

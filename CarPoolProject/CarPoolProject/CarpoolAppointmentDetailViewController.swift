@@ -34,6 +34,12 @@ class CarpoolAppointmentDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func backButton(sender: AnyObject) {
+        
+       // navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+
 
     /*
     // MARK: - Navigation

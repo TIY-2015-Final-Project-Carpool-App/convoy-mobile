@@ -21,6 +21,8 @@ class JoinAppointmentViewController: UIViewController, UITableViewDelegate, UITa
         childTableView.delegate = self
         childTableView.dataSource = self
         
+        childTableView.backgroundColor = UIColor.clearColor()
+        
         RailsRequest.session().getChildrenIndexWithCompletion { () -> Void in
             self.childTableView.reloadData()
         }
@@ -36,6 +38,8 @@ class JoinAppointmentViewController: UIViewController, UITableViewDelegate, UITa
         
         cell.childnameLabel.text = RailsRequest.session().childIds[indexPath.row]["first_name"] as? String
         cell.joinChildButton.tag = indexPath.row
+        
+        cell.backgroundColor = UIColor.clearColor()
         
         return cell
     }
@@ -70,6 +74,10 @@ class JoinAppointmentViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
+    @IBAction func backButton(sender: AnyObject) {
+        
+        navigationController?.popViewControllerAnimated(true)
+    }
 
     /*
     // MARK: - Navigation
