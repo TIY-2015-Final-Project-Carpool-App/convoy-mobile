@@ -10,7 +10,6 @@ import UIKit
 
 class EmergencyContactListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
- //   var contactArray: [[String:AnyObject]] = [[:]]
     var child: [String:AnyObject]?
 
     @IBOutlet weak var emergencyContactTableView: UITableView!
@@ -23,8 +22,6 @@ class EmergencyContactListViewController: UIViewController, UITableViewDelegate,
         emergencyContactTableView.dataSource = self
         
         RailsRequest.session().getChildContactIndexWithCompletion(child!, completion: { () -> Void in
-            
-   //         self.contactArray = RailsRequest.session().contactIds
             self.emergencyContactTableView.reloadData()
         })
     }
@@ -71,6 +68,14 @@ class EmergencyContactListViewController: UIViewController, UITableViewDelegate,
     }
     
     
+    @IBAction func backButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+        
+        //navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
     
     // MARK: - Navigation
 
@@ -80,6 +85,8 @@ class EmergencyContactListViewController: UIViewController, UITableViewDelegate,
         // Pass the selected object to the new view controller.
         
         if let cellButton = sender as? UIButton {
+            
+            if RailsRequest.session().contactIds.isEmpty { return }
             
             let contact = RailsRequest.session().contactIds[cellButton.tag]
             

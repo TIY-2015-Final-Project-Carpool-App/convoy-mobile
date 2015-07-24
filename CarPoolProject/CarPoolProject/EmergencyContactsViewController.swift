@@ -29,6 +29,10 @@ class EmergencyContactsViewController: UIViewController, UITextFieldDelegate, UI
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
+    
     @IBAction func createContact(sender: AnyObject) {
         
         RailsRequest.session().firstName = firstnameField.text
@@ -52,6 +56,10 @@ class EmergencyContactsViewController: UIViewController, UITextFieldDelegate, UI
         })
     }
 
+    @IBAction func cancelButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation

@@ -76,7 +76,8 @@ class JoinAppointmentViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBAction func backButton(sender: AnyObject) {
         
-        navigationController?.popViewControllerAnimated(true)
+       // navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(false, completion: nil)
     }
 
     /*

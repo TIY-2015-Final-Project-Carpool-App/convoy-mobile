@@ -92,6 +92,10 @@ class CreateChildViewController: UIViewController, UITextFieldDelegate, UIAlertV
         }
     }
     
+    @IBAction func cancelButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
 
     /*

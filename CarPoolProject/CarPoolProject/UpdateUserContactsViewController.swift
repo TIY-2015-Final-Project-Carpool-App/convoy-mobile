@@ -30,6 +30,10 @@ class UpdateUserContactsViewController: UIViewController, UIAlertViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+   
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
     
     @IBAction func updateContact(sender: AnyObject) {
         
@@ -54,6 +58,13 @@ class UpdateUserContactsViewController: UIViewController, UIAlertViewDelegate {
 
         })
     }
+    
+    @IBAction func backButton(sender: AnyObject) {
+        
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+
     
     
 

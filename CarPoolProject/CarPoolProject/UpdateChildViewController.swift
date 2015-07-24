@@ -45,6 +45,10 @@ class UpdateChildViewController: UIViewController, UITextFieldDelegate, UIAlertV
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
+    
     @IBAction func updateChild(sender: AnyObject) {
         
         RailsRequest.session().firstName = firstnameTextField.text
@@ -79,6 +83,13 @@ class UpdateChildViewController: UIViewController, UITextFieldDelegate, UIAlertV
             })
         }
 
+    }
+    
+    
+    @IBAction func backButton(sender: AnyObject) {
+        
+        //navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(false, completion: nil)
     }
 
     

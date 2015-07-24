@@ -14,6 +14,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var carpoolTableView: UITableView!
+    @IBOutlet weak var monthLabel: UILabel!
 
     var shouldShowDaysOut = true
     var animationFinished = true
@@ -25,6 +26,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 
         carpoolTableView.dataSource = self
         carpoolTableView.delegate = self
+        
+        monthLabel.text = CVDate(date: NSDate()).globalDescription
         
         carpoolTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         carpoolTableView.backgroundColor = UIColor.clearColor()
@@ -68,7 +71,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         if RailsRequest.session().givenUser == nil {
         
             let wvc = storyboard?.instantiateViewControllerWithIdentifier("welcomeVC") as! WelcomeViewController
-            presentViewController(wvc, animated: true, completion: nil)
+            tabBarController?.presentViewController(wvc, animated: true, completion: nil)
             
         }
     }
@@ -389,41 +392,41 @@ extension DashboardViewController: CVCalendarViewDelegate {
     }
     
     func presentedDateUpdated(date: CVDate) {
-        //        if monthLabel.text != date.globalDescription && self.animationFinished {
-        //            let updatedMonthLabel = UILabel()
-        //            updatedMonthLabel.textColor = monthLabel.textColor
-        //            updatedMonthLabel.font = monthLabel.font
-        //            updatedMonthLabel.textAlignment = .Center
-        //            updatedMonthLabel.text = date.globalDescription
-        //            updatedMonthLabel.sizeToFit()
-        //            updatedMonthLabel.alpha = 0
-        //            updatedMonthLabel.center = self.monthLabel.center
-        //
-        //            let offset = CGFloat(48)
-        //            updatedMonthLabel.transform = CGAffineTransformMakeTranslation(0, offset)
-        //            updatedMonthLabel.transform = CGAffineTransformMakeScale(1, 0.1)
-        //
-        //            UIView.animateWithDuration(0.35, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-        //                self.animationFinished = false
-        //                self.monthLabel.transform = CGAffineTransformMakeTranslation(0, -offset)
-        //                self.monthLabel.transform = CGAffineTransformMakeScale(1, 0.1)
-        //                self.monthLabel.alpha = 0
-        //
-        //                updatedMonthLabel.alpha = 1
-        //                updatedMonthLabel.transform = CGAffineTransformIdentity
-        //
-        //                }) { _ in
-        //
-        //                    self.animationFinished = true
-        //                    self.monthLabel.frame = updatedMonthLabel.frame
-        //                    self.monthLabel.text = updatedMonthLabel.text
-        //                    self.monthLabel.transform = CGAffineTransformIdentity
-        //                    self.monthLabel.alpha = 1
-        //                    updatedMonthLabel.removeFromSuperview()
-        //            }
-        //
-        //            self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
-        //        }
+                if monthLabel.text != date.globalDescription && self.animationFinished {
+                    let updatedMonthLabel = UILabel()
+                    updatedMonthLabel.textColor = monthLabel.textColor
+                    updatedMonthLabel.font = monthLabel.font
+                    updatedMonthLabel.textAlignment = .Center
+                    updatedMonthLabel.text = date.globalDescription
+                    updatedMonthLabel.sizeToFit()
+                    updatedMonthLabel.alpha = 0
+                    updatedMonthLabel.center = self.monthLabel.center
+        
+                    let offset = CGFloat(48)
+                    updatedMonthLabel.transform = CGAffineTransformMakeTranslation(0, offset)
+                    updatedMonthLabel.transform = CGAffineTransformMakeScale(1, 0.1)
+        
+                    UIView.animateWithDuration(0.35, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                        self.animationFinished = false
+                        self.monthLabel.transform = CGAffineTransformMakeTranslation(0, -offset)
+                        self.monthLabel.transform = CGAffineTransformMakeScale(1, 0.1)
+                        self.monthLabel.alpha = 0
+        
+                        updatedMonthLabel.alpha = 1
+                        updatedMonthLabel.transform = CGAffineTransformIdentity
+        
+                        }) { _ in
+        
+                            self.animationFinished = true
+                            self.monthLabel.frame = updatedMonthLabel.frame
+                            self.monthLabel.text = updatedMonthLabel.text
+                            self.monthLabel.transform = CGAffineTransformIdentity
+                            self.monthLabel.alpha = 1
+                            updatedMonthLabel.removeFromSuperview()
+                    }
+        
+                    self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
+                }
     }
     
     func topMarker(shouldDisplayOnDayView dayView: CVCalendarDayView) -> Bool {

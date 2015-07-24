@@ -32,6 +32,10 @@ class UpdateMedicalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
+    
     @IBAction func updateMedicalInfo(sender: AnyObject) {
         
         RailsRequest.session().conditions = medicalField.text
@@ -55,6 +59,12 @@ class UpdateMedicalViewController: UIViewController {
         })
 
     }
+    
+    @IBAction func backButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
     
     @IBAction func deleteMedicalInfo(sender: AnyObject) {
         

@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIAlertView
         
         childrenTableView.delegate = self
         childrenTableView.dataSource = self
-        
+        childrenTableView.layer.cornerRadius = 10
 
             RailsRequest.session().getUserInfoWithCompletion { () -> Void in
                 
@@ -71,20 +71,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIAlertView
                 
             }
         
-        
-        
-        
-        
-        
-        
         RailsRequest.session().getChildrenIndexWithCompletion { () -> Void in
-//            self.childrenArray = RailsRequest.session().childIds
             self.childrenTableView.reloadData()
         }
-        
-        
-        
-    
 }
     
     override func viewWillAppear(animated: Bool) {
@@ -189,8 +178,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIAlertView
     
     @IBAction func addOrUpdateChildButton(sender: AnyObject) {
         
-     //   let ccvc = storyboard?.instantiateViewControllerWithIdentifier("createChildVC") as! CreateChildViewController
-       // navigationController?.popToRootViewControllerAnimated(true)
+        let ccvc = storyboard?.instantiateViewControllerWithIdentifier("createChildVC") as! CreateChildViewController
+        presentViewController(ccvc, animated: true, completion: nil)
         
     }
     
@@ -202,16 +191,21 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UIAlertView
         
         if RailsRequest.session().givenUser == nil {
             
+            dismissViewControllerAnimated(false, completion: nil)
+            
             let wvc = storyboard?.instantiateViewControllerWithIdentifier("welcomeVC") as! WelcomeViewController
             
-            presentViewController(wvc, animated: true, completion: nil)
+            tabBarController?.presentViewController(wvc, animated: true, completion: nil)
         }
     }
     
     @IBAction func backButton(sender: AnyObject) {
         
-        let dvc = storyboard?.instantiateViewControllerWithIdentifier("dashoboardVC") as! DashboardViewController
-        presentViewController(dvc, animated: true, completion: nil)
+//        let dvc = storyboard?.instantiateViewControllerWithIdentifier("dashoboardVC") as! DashboardViewController
+//        presentViewController(dvc, animated: true, completion: nil)
+        
+        dismissViewControllerAnimated(false, completion: nil)
+        
     }
 
     // MARK: - Navigation

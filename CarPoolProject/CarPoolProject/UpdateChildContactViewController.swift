@@ -32,6 +32,10 @@ class UpdateChildContactViewController: UIViewController, UIAlertViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
+    
     @IBAction func updateChildContact(sender: AnyObject) {
         
         RailsRequest.session().firstName = firstnameField.text
@@ -55,6 +59,12 @@ class UpdateChildContactViewController: UIViewController, UIAlertViewDelegate {
         })
         
     }
+    
+    @IBAction func backButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation

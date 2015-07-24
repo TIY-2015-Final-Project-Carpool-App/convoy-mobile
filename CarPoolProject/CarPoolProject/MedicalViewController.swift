@@ -32,6 +32,10 @@ class MedicalViewController: UIViewController, UITextFieldDelegate, UIAlertViewD
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
+    
     @IBAction func updateMedInfo(sender: AnyObject) {
         
         RailsRequest.session().conditions = conditionsField.text
@@ -54,6 +58,14 @@ class MedicalViewController: UIViewController, UITextFieldDelegate, UIAlertViewD
             self.dismissViewControllerAnimated(false, completion: nil)
         })
     }
+    
+    
+    @IBAction func cancelButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
+    
 
     /*
     // MARK: - Navigation

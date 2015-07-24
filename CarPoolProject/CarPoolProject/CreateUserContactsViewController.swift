@@ -28,6 +28,10 @@ class CreateUserContactsViewController: UIViewController, UIAlertViewDelegate, U
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+   
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
     
     @IBAction func createUserContact(sender: AnyObject) {
         
@@ -51,6 +55,12 @@ class CreateUserContactsViewController: UIViewController, UIAlertViewDelegate, U
 
         }
     }
+    
+    @IBAction func cancelButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation

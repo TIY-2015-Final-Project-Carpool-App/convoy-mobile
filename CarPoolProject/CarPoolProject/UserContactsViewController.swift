@@ -19,6 +19,7 @@ class UserContactsViewController: UIViewController, UITableViewDataSource, UITab
 
         userContactTableView.delegate = self
         userContactTableView.dataSource = self
+        userContactTableView.backgroundColor = UIColor.clearColor()
         
         RailsRequest.session().getUserContactIndexWithCompletion { () -> Void in
             
@@ -55,8 +56,14 @@ class UserContactsViewController: UIViewController, UITableViewDataSource, UITab
             cell.contactDetail.tag = indexPath.row
             
         }
-        
+        cell.backgroundColor = UIColor.clearColor()
         return cell
+    }
+    
+    
+    @IBAction func backButton(sender: AnyObject) {
+        
+        navigationController?.dismissViewControllerAnimated(false, completion: nil)
     }
 
     

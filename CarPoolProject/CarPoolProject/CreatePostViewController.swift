@@ -27,20 +27,29 @@ class CreatePostViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
+    
     
     @IBAction func createPost(sender: AnyObject) {
         
         RailsRequest.session().title = titleField.text
         RailsRequest.session().body = postBody.text
         RailsRequest.session().urgency = urgencyField.text
-        
-        RailsRequest.session().createPostWithCompletion(carpoolId!) { () -> Void in
+    
+        RailsRequest.session().createPostWithCompletion(carpoolId!, completion: { (postInfo) -> Void in
             
+            RailsRequest.session().posts.append(postInfo)
             self.dismissViewControllerAnimated(false, completion: nil)
-        }
+        })
         
     }
     
+    @IBAction func cancelButton(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(false, completion: nil)
+    }
 
     /*
     // MARK: - Navigation

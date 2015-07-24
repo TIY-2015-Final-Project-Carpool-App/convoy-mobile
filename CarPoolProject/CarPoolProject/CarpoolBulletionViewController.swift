@@ -19,6 +19,10 @@ class CarpoolBulletionViewController: UIViewController, UITableViewDelegate, UIT
         carpoolTableView.dataSource = self
         carpoolTableView.delegate = self
         
+        carpoolTableView.backgroundColor = UIColor.clearColor()
+        
+        navigationController?.navigationBarHidden = true
+        
         RailsRequest.session().getCarpoolIndexWithCompletion { () -> Void in
             self.carpoolTableView.reloadData()
         }
@@ -40,10 +44,18 @@ class CarpoolBulletionViewController: UIViewController, UITableViewDelegate, UIT
         cell.carpoolTitle.text = RailsRequest.session().carpools[indexPath.row]["title"] as? String
         cell.checkBoardButton.tag = indexPath.row
         
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     }
     
 
+    @IBAction func backButton(sender: AnyObject) {
+        
+        navigationController?.dismissViewControllerAnimated(false, completion: nil)
+        
+    }
+    
+    
     
     // MARK: - Navigation
 

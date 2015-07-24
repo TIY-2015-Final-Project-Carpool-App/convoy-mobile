@@ -51,6 +51,10 @@ class BulletinTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        bulletinTableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
@@ -78,7 +82,8 @@ class BulletinTableViewController: UITableViewController {
             
             if let user = postInfo["user"] as? [String:AnyObject] {
                 
-              let username = user["username"] as? String
+                let username = user["username"] as? String
+                cell.usernameLabel.text = username
             }
         
         
@@ -134,6 +139,12 @@ class BulletinTableViewController: UITableViewController {
         return height
         
     }
+    
+    @IBAction func backButton(sender: AnyObject) {
+        
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
     
 //    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 //        
