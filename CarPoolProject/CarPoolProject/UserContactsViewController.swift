@@ -9,8 +9,6 @@
 import UIKit
 
 class UserContactsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    var contactArray: [[String:AnyObject]] = [[:]]
 
     @IBOutlet weak var userContactTableView: UITableView!
     
@@ -76,12 +74,15 @@ class UserContactsViewController: UIViewController, UITableViewDataSource, UITab
         
         if let cellButton = sender as? UIButton {
             
+            if !RailsRequest.session().contactIds.isEmpty {
+            
             let contact = RailsRequest.session().contactIds[cellButton.tag]
             
             if let updateUserContactVC = segue.destinationViewController as? UpdateUserContactsViewController {
                 
                 updateUserContactVC.contact = contact
-            }
+                }
+            } else { return }
         }
     }
     

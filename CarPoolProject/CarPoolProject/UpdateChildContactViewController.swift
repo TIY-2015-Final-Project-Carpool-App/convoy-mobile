@@ -23,7 +23,11 @@ class UpdateChildContactViewController: UIViewController, UIAlertViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        firstnameField.text = contact!["first_name"] as! String
+        if let firstname = contact!["first_name"] as? String {
+            firstnameField.text = firstname
+        }
+        
+        
 
     }
 
